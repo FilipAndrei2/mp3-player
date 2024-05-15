@@ -10,6 +10,7 @@ std::ofstream sdlerr("SDL.err");
 
 int main(int argc, char ** argv)
 {
+    (void)argc; (void)argv;
     mp3::MainSystem app;
     app.run();
 }

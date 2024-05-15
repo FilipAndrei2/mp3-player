@@ -13,8 +13,8 @@
 
 namespace mp3
 {
-    SDL_Handler::SDL_Handler()
-        : m_window(nullptr), m_renderer(nullptr)
+    SDL_Handler::SDL_Handler(void)
+        : m_window(nullptr), m_renderer(nullptr), m_isRunning(true)
     {
         if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
         {
@@ -55,7 +55,7 @@ namespace mp3
         }
     }
 
-    SDL_Handler::~SDL_Handler()
+    SDL_Handler::~SDL_Handler(void)
     {
         SDL_DestroyRenderer(m_renderer);
         m_renderer = nullptr;
@@ -67,5 +67,40 @@ namespace mp3
         Mix_Quit();
         IMG_Quit();
         SDL_Quit();
+    }
+
+    void SDL_Handler::takeInput(void)
+    {
+        SDL_Event event;
+        while (SDL_PollEvent(&event))
+        {
+            if (event.type == SDL_QUIT)
+            {
+                m_isRunning = false;
+            }
+
+            switch (event.key.keysym.sym) //verifica apasarea tastelor
+            {
+
+            }
+        }
+    }
+
+    void SDL_Handler::renderFrame(void)
+    {
+        SDL_SetRenderDrawColor(m_renderer, 255, 254, 253, 255);
+        SDL_RenderClear(m_renderer);
+
+        SDL_RenderPresent(m_renderer);
+    }
+
+    void SDL_Handler::mainLoop(void)
+    {
+        while (m_isRunning)
+        {
+            takeInput();
+            //gameLogic();
+            renderFrame();
+        }
     }
 }
