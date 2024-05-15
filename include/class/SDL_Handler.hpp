@@ -12,8 +12,12 @@ namespace mp3
         SDL_Handler();
         ~SDL_Handler();
         void mainLoop(void);
-        void takeInput(void);
+        bool takeInput(void); //returneaza true daca aplicatia continua, false daca aplicatia tb sa se inchida frameul urmator
         void renderFrame(void);
+        inline void stop(void);
+        SDL_Window * getWindow(void);
+        SDL_Renderer * getRenderer(void);
+
     private:
         SDL_Window * m_window;
         SDL_Renderer * m_renderer;

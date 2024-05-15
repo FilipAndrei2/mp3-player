@@ -2,7 +2,7 @@ CC = g++
 FLAGS = -Wall -Wextra -g
 INCLUDE_DIR = -I include/
 LIB_DIR = -L lib/
-LIBS = -lSDL2 -lSDL2main -lSDL2_image -lSDL2_mixer -lSDL2_ttf -limgui -lpython312
+LIBS = -limgui -lSDL2 -lSDL2main -lSDL2_image -lSDL2_mixer -lSDL2_ttf  -lpython312
 CPP_FILES = src/*.cpp
 
 BUILD_DIR = bin

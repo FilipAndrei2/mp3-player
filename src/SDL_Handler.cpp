@@ -5,6 +5,9 @@
 #include <SDL2/SDL_mixer.h>
 #include <SDL2/SDL_ttf.h>
 
+#include <imgui/imgui.h>
+#include <imgui/imgui_impl_sdl2.h>
+
 #include <fstream>
 #include <cstdio>
 
@@ -69,21 +72,28 @@ namespace mp3
         SDL_Quit();
     }
 
-    void SDL_Handler::takeInput(void)
+    inline void SDL_Handler::stop(void)
+    {
+        m_isRunning = false;
+    }
+
+    bool SDL_Handler::takeInput(void)
     {
         SDL_Event event;
         while (SDL_PollEvent(&event))
         {
             if (event.type == SDL_QUIT)
             {
-                m_isRunning = false;
+                return false;
             }
 
             switch (event.key.keysym.sym) //verifica apasarea tastelor
             {
 
             }
+            ImGui_ImplSDL2_ProcessEvent(&event);
         }
+        return true;
     }
 
     void SDL_Handler::renderFrame(void)
@@ -91,7 +101,6 @@ namespace mp3
         SDL_SetRenderDrawColor(m_renderer, 255, 254, 253, 255);
         SDL_RenderClear(m_renderer);
 
-        SDL_RenderPresent(m_renderer);
     }
 
     void SDL_Handler::mainLoop(void)
@@ -103,4 +112,15 @@ namespace mp3
             renderFrame();
         }
     }
+
+    SDL_Window * SDL_Handler::getWindow(void)
+    {
+        return m_window;
+    }
+
+    SDL_Renderer * SDL_Handler::getRenderer(void)
+    {
+        return m_renderer;
+    }
+    
 }
