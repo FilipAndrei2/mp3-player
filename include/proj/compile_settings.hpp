@@ -1,0 +1,14 @@
+#pragma once
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_mixer.h>
+
+/* SDL INIT */
+#define IMG_INIT_FLAGS IMG_INIT_PNG
+#define MIX_INIT_FLAGS MIX_INIT_MP3
+
+/* WINDOW SETTINGS */
+#define WINDOW_TITLE "FilipPlayer V4.0"
+#define WINDOW_WIDTH 600
+#define WINDOW_HEIGHT 600
+#define WINDOW_FLAGS SDL_WINDOW_SHOWN
+#define RENDERER_FLAGS SDL_RENDERER_ACCELERATED
